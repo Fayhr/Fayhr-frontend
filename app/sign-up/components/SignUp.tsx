@@ -53,7 +53,7 @@ function SignUp() {
 
         <input
           type={seePassword ? "text" : "password"}
-          placeholder="Email address"
+          placeholder="Password"
           className="w-full h-[3rem] pl-12 bg-gray-100 border-gray-400 border-[0.1rem] rounded-md"
         />
         {seePassword ? (
