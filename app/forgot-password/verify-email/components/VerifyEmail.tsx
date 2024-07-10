@@ -4,14 +4,13 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { MdArrowBackIosNew } from "react-icons/md";
 import { LuLock } from "react-icons/lu";
+import { useRouter } from "next/navigation";
 import { Montserrat } from "next/font/google";
 
-// const inter = Inter({ subsets: ["latin"] });
+
 
 const montserrat = Montserrat({subsets: ["latin"]});
 
-
-import { useRouter } from "next/navigation";
 function VerifyEmail() {
   const router = useRouter();
 
@@ -65,7 +64,7 @@ function VerifyEmail() {
       </div>
 
       <Link
-        href={"/forgot-password/reset-password"}
+        href={"/forgot-password/verify-email/reset-password"}
         type="submit"
         className="bg-primary w-full text-white font-[500] px-6 py-2 rounded-3xl mt-6"
       >
