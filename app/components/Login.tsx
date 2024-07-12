@@ -17,11 +17,9 @@ import { useRouter } from "next/navigation";
 
 const wallets = [
   createWallet("io.metamask"),
-  createWallet("com.coinbase.wallet"),
   walletConnect(),
   createWallet("com.trustwallet.app"),
   createWallet("io.zerion.wallet"),
-  createWallet("me.rainbow"),
 ];
 
 function Login() {
