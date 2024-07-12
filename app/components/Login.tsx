@@ -70,8 +70,7 @@ useEffect(() => {
             title: "Fahyr ",
             titleIcon: "",
             welcomeScreen: {
-              title:
-                "Building the World's First Decentralized Consumer Cooperatives 🌊",
+              title: "A fairer economy...",
               img: {
                 src: "https://i.postimg.cc/FF0q20JY/Mixed-Primary-Logo-PNG.png",
                 width: 150,
