@@ -1,6 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { ConnectButton, useActiveAccount, lightTheme } from "thirdweb/react";
+import { TransactionButton, useReadContract } from "thirdweb/react";
+import { createWallet, walletConnect } from "thirdweb/wallets";
+import {client, chain, CONTRACT} from "../utils/constant"
 import { MdArrowBackIosNew } from "react-icons/md";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { LuLock } from "react-icons/lu";
@@ -11,24 +15,73 @@ import { FcGoogle } from "react-icons/fc";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
+const wallets = [
+  createWallet("io.metamask"),
+  createWallet("com.coinbase.wallet"),
+  walletConnect(),
+  createWallet("com.trustwallet.app"),
+  createWallet("io.zerion.wallet"),
+  createWallet("me.rainbow"),
+];
+
 function Login() {
   const [seePassword, setSeePassword] = useState(false);
+  const [accountConnected, setAccountConnected] = useState(null);
   const router = useRouter();
+  const account: any = useActiveAccount?.();
 
+useEffect(() => {
+  setAccountConnected(account);
+  console.log(account);
+}, [account])
+    const {
+      data: token,
+      isLoading: loadingCount,
+      refetch,
+    } = useReadContract({
+      contract: CONTRACT,
+      method: "nextCrowdfundId",
+    });
   const handleGoBack = () => {
     router.back();
   };
 
   return (
     <form className="w-full h-full  gap-y-[0.45rem] flex flex-col items-center">
-   
-        <MdArrowBackIosNew
-          onClick={handleGoBack}
-          className="absolute top-4 left-4 cursor-pointer"
-        />
-   
-      <p className="text-[1.0625rem] font-[800] mt-6 mb-12">Log in</p>
+      <MdArrowBackIosNew
+        onClick={handleGoBack}
+        className="absolute top-4  left-4 cursor-pointer"
+      />
 
+      <p className="text-[1.0625rem] font-[800] mt-6 mb-12">Log in</p>
+      <div className="text-center w-full flex justify-center">
+        <ConnectButton
+          client={client}
+          chain={chain}
+          wallets={wallets}
+          theme={lightTheme({
+            colors: {
+              primaryButtonBg: "#f2f1f3",
+              primaryButtonText: "#141414",
+            },
+          })}
+          connectModal={{
+            size: "wide",
+            title: "Fahyr ",
+            titleIcon: "",
+            welcomeScreen: {
+              title: "A fairer economy...",
+              img: {
+                src: "https://i.postimg.cc/FF0q20JY/Mixed-Primary-Logo-PNG.png",
+                width: 150,
+                height: 150,
+              },
+            },
+            showThirdwebBranding: false,
+          }}
+        />
+      </div>
+      {loadingCount ? <h2>...</h2> : <h2>{token}</h2>}
       <div className="w-full relative">
         <MdOutlineMailOutline className="absolute top-[0.9rem] w-[1.2rem] h-[1.2rem] left-6 text-gray-400" />
         <input
@@ -47,7 +100,7 @@ function Login() {
 
         <input
           type={seePassword ? "text" : "password"}
-          placeholder="Email address"
+          placeholder="Password"
           className="w-full h-[3rem] pl-12 bg-gray-100 border-gray-400 border-[0.1rem] rounded-md"
         />
         {seePassword ? (
@@ -62,7 +115,10 @@ function Login() {
           />
         )}
       </div>
-      <Link href={"/forgot-password"} className="text-primary font-[500] text-[1rem] text-right cursor-pointer w-full">
+      <Link
+        href={"/forgot-password"}
+        className="text-primary font-[500] text-[1rem] text-right cursor-pointer w-full"
+      >
         Forgot password?
       </Link>
 
