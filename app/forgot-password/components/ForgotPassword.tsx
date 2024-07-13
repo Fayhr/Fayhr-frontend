@@ -1,5 +1,4 @@
 "use client";
-
 import Link from "next/link";
 import { MdArrowBackIosNew } from "react-icons/md";
 import { MdOutlineMailOutline } from "react-icons/md";
