@@ -1,10 +1,16 @@
 "use client"
 import React from 'react'
+import WalletCard from '../components/WalletCard'
+import NavigationBar from '../components/NavigationBar'
 
 const Page = () => {
   return (
     <div>
-      Wallet
+      <WalletCard />
+      <div>
+
+      </div>
+      <NavigationBar />
     </div>
   )
 }
