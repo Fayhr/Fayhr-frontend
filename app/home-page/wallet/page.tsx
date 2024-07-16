@@ -7,8 +7,10 @@ import History from '../components/History'
 const Page = () => {
   return (
     <div className='bg-slate-300'>
-      <WalletCard />
-      <History />
+      <div className='pb-28'>
+        <WalletCard />
+        <History />
+      </div>
       <NavigationBar />
     </div>
   )
