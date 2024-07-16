@@ -8,7 +8,7 @@ const Poll = () => {
   const router = useRouter();
   const pathname = usePathname();
   // const { pathname } = router;
-  const showPoll = pathname === '../home-page/crowdfund-page/page.tsx'
+  const showPoll = pathname === '/home-page/crowdfund-page'
 
   return (
     <div>
