@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import { FcGoogle } from "react-icons/fc";
 import { ConnectButton, useActiveAccount, lightTheme } from "thirdweb/react";
 import {
   TransactionButton,
@@ -61,29 +60,11 @@ function HomePage() {
         Cheaper, Safer <br /> On Foodwish
       </h1>
 
-      <div>
+      <div className="w-ful flex gap-x-4">
         <Link href="/sign-up" className="bg-primary text-white font-[500] px-6 py-2 rounded-3xl mt-12" > Sign up </Link>
         <Link href="/log-in" className="bg-primary text-white font-[500] px-6 py-2 rounded-3xl mt-12" >  Login </Link>
       </div>
-      <AutoConnect client={client} timeout={10000} wallets={wallets} />
-      <ConnectButton
-        client={client}
-        chain={chain}
-        wallets={wallets}
-        theme={lightTheme({
-          colors: {
-            primaryButtonBg: "#01A8F6",
-            primaryButtonText: "#f2f1f3",
-          },
-        })}
-        connectButton={{
-          label: "Generate Wallet",
-        }}
-        connectModal={{
-          title: "Fahyr",
-          showThirdwebBranding: false,
-        }}
-      />
+      
     </>
   );
 }
