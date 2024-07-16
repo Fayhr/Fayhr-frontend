@@ -2,8 +2,12 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ConnectButton, useActiveAccount, lightTheme } from "thirdweb/react";
-import { TransactionButton, useReadContract } from "thirdweb/react";
-import { createWallet, walletConnect } from "thirdweb/wallets";
+import {
+  TransactionButton,
+  useReadContract,
+  AutoConnect,
+} from "thirdweb/react";
+import {inAppWallet } from "thirdweb/wallets";
 import {client, chain, CONTRACT} from "../utils/constant"
 import { MdArrowBackIosNew } from "react-icons/md";
 import { MdOutlineMailOutline } from "react-icons/md";
@@ -14,12 +18,15 @@ import { FaRegEye } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { getUserEmail } from "thirdweb/wallets/in-app";
+
 
 const wallets = [
-  createWallet("io.metamask"),
-  walletConnect(),
-  createWallet("com.trustwallet.app"),
-  createWallet("io.zerion.wallet"),
+  inAppWallet({
+    auth: {
+      options: ["google", "apple", "facebook"],
+    },
+  }),
 ];
 
 function Login() {
@@ -27,10 +34,16 @@ function Login() {
   const [accountConnected, setAccountConnected] = useState(null);
   const router = useRouter();
   const account: any = useActiveAccount?.();
+  
+  useEffect(() => {
+    setAccountConnected(account);
+    console.log({...account});
+    async function getEmail() {
+    const email: any = await getUserEmail({ client });
+    console.log(email);
+  }
 
-useEffect(() => {
-  setAccountConnected(account);
-  console.log(account);
+  getEmail()
 }, [account])
     const {
       data: token,
@@ -53,6 +66,12 @@ useEffect(() => {
 
       <p className="text-[1.0625rem] font-[800] mt-6 mb-12">Log in</p>
       <div className="text-center w-full flex justify-center">
+        <AutoConnect
+          client={client}
+          timeout={10000}
+          wallets={wallets}
+          
+        />
         <ConnectButton
           client={client}
           chain={chain}
