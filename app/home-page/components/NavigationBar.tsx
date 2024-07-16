@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import { PiCurrencyCircleDollar } from 'react-icons/pi'
 import { BsPersonCircle } from 'react-icons/bs'

@@ -2,14 +2,13 @@
 import React from 'react'
 import WalletCard from '../components/WalletCard'
 import NavigationBar from '../components/NavigationBar'
+import History from '../components/History'
 
 const Page = () => {
   return (
-    <div>
+    <div className='bg-slate-300'>
       <WalletCard />
-      <div>
-
-      </div>
+      <History />
       <NavigationBar />
     </div>
   )
