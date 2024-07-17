@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-// import "./globals.css";
+
 import ThirdwebWallet from "./ThirdwebWallet"
 
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,11 +14,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} relative`}>
+    <main className="w-full h-full">
+
         <ThirdwebWallet />
         {children}
-      </body>
-    </html>
+    
+    </main>
   );
 }
