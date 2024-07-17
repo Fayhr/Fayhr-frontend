@@ -3,9 +3,9 @@ import React from 'react'
 const History = () => {
   return (
     <div className='text-black w-full px-5'>
-      <h2 className='text-xl font-bold'>History</h2>
+      <h2>History</h2>
       <div className='flex justify-center mt-3 w-full'>
-        <table className='w-full h-full text-black text-sm'>
+        <table className='w-full text-black text-sm'>
             <thead className='w-full'>
                 <tr className='text-slate-600'>
                     <th>Type</th>

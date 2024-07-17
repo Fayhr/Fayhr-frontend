@@ -3,6 +3,7 @@ import React from 'react'
 import SearchBar from './components/SearchBar'
 import NavigationBar from './components/NavigationBar'
 import Poll from './components/Poll'
+import "./style.css"
 
 const Page = () => {
   return (
