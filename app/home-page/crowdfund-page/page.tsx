@@ -9,7 +9,7 @@ const Page = () => {
   return (
     <div>
       <SearchBar />
-      <div className='h-full overflow-y-scroll pb-28 bg-white'>
+      <div className='h-full overflow-y-scroll pb-28 bg-slate-100'>
         <Poll />
         <Items />
       </div>

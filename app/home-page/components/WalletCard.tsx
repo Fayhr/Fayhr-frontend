@@ -7,7 +7,7 @@ const WalletCard = () => {
   return (
     <div className='grid gap-5 p-5'>
         <p className='text-xl font-bold'>Hi Blacdav,</p>
-        <div className='rounded-xl overflow-hidden'>
+        <div className='rounded-xl w-full overflow-hidden'>
             <div className='text-white bg-primary h-24 p-5'>
                 <p className='font-semibold'>Available Balance</p>
                 <p className='text-2xl'>N150,000</p>

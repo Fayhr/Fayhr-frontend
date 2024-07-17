@@ -14,74 +14,74 @@ const History = () => {
                     <th>Date</th>
                 </tr>
             </thead>
-            <tbody className='w-full h-full overflow-y-scroll border-t-8 border-slate-300 px-3'>
-                <tr className='bg-white h-14 text-center mb-3 border-b-8 border-slate-300'>
+            <tbody className='w-full h-full overflow-y-scroll border-t-8 border-slate-100 px-3'>
+                <tr className='bg-white h-14 text-center mb-3 border-b-8 border-slate-100'>
                     <td>Deposit</td>
                     <td>N3,600</td>
                     <td>Completed</td>
                     <td>14/03/2024</td>
                 </tr>
-                <tr className='bg-white h-14 text-center border-b-8 border-slate-300'>
+                <tr className='bg-white h-14 text-center border-b-8 border-slate-100'>
                     <td>Deposit</td>
                     <td>N3,600</td>
                     <td>Completed</td>
                     <td>14/03/2024</td>
                 </tr>
-                <tr className='bg-white h-14 text-center mb-3 border-b-8 border-slate-300'>
+                <tr className='bg-white h-14 text-center mb-3 border-b-8 border-slate-100'>
                     <td>Deposit</td>
                     <td>N3,600</td>
                     <td>Completed</td>
                     <td>14/03/2024</td>
                 </tr>
-                <tr className='bg-white h-14 text-center border-b-8 border-slate-300'>
+                <tr className='bg-white h-14 text-center border-b-8 border-slate-100'>
                     <td>Deposit</td>
                     <td>N3,600</td>
                     <td>Completed</td>
                     <td>14/03/2024</td>
                 </tr>
-                <tr className='bg-white h-14 text-center mb-3 border-b-8 border-slate-300'>
+                <tr className='bg-white h-14 text-center mb-3 border-b-8 border-slate-100'>
                     <td>Deposit</td>
                     <td>N3,600</td>
                     <td>Completed</td>
                     <td>14/03/2024</td>
                 </tr>
-                <tr className='bg-white h-14 text-center border-b-8 border-slate-300'>
+                <tr className='bg-white h-14 text-center border-b-8 border-slate-100'>
                     <td>Deposit</td>
                     <td>N3,600</td>
                     <td>Completed</td>
                     <td>14/03/2024</td>
                 </tr>
-                <tr className='bg-white h-14 text-center mb-3 border-b-8 border-slate-300'>
+                <tr className='bg-white h-14 text-center mb-3 border-b-8 border-slate-100'>
                     <td>Deposit</td>
                     <td>N3,600</td>
                     <td>Completed</td>
                     <td>14/03/2024</td>
                 </tr>
-                <tr className='bg-white h-14 text-center border-b-8 border-slate-300'>
+                <tr className='bg-white h-14 text-center border-b-8 border-slate-100'>
                     <td>Deposit</td>
                     <td>N3,600</td>
                     <td>Completed</td>
                     <td>14/03/2024</td>
                 </tr>
-                <tr className='bg-white h-14 text-center mb-3 border-b-8 border-slate-300'>
+                <tr className='bg-white h-14 text-center mb-3 border-b-8 border-slate-100'>
                     <td>Deposit</td>
                     <td>N3,600</td>
                     <td>Completed</td>
                     <td>14/03/2024</td>
                 </tr>
-                <tr className='bg-white h-14 text-center border-b-8 border-slate-300'>
+                <tr className='bg-white h-14 text-center border-b-8 border-slate-100'>
                     <td>Deposit</td>
                     <td>N3,600</td>
                     <td>Completed</td>
                     <td>14/03/2024</td>
                 </tr>
-                <tr className='bg-white h-14 text-center mb-3 border-b-8 border-slate-300'>
+                <tr className='bg-white h-14 text-center mb-3 border-b-8 border-slate-100'>
                     <td>Deposit</td>
                     <td>N3,600</td>
                     <td>Completed</td>
                     <td>14/03/2024</td>
                 </tr>
-                <tr className='bg-white h-14 text-center border-b-8 border-slate-300'>
+                <tr className='bg-white h-14 text-center border-b-8 border-slate-100'>
                     <td>Deposit</td>
                     <td>N3,600</td>
                     <td>Completed</td>

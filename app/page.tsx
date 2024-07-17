@@ -14,7 +14,7 @@ export default function Home() {
         className="m-0 w-[5rem] h-[5rem] mb2"
       />
       <h1 className="text-[2rem] font-[800] text-center mb-3">
-        Cheaper, Safer <br /> On Foodwish
+        Cheaper, Safer <br /> On Fayhr
       </h1>
 
       <Link href={"/sign-up"} className="w-[90%]">

@@ -8,7 +8,7 @@ const Page = () => {
   return (
     <main>
       <SearchBar />
-      <div className='w-full px-5 h-full bg-slate-600 overflow-y-scroll mb-44'>
+      <div className='w-full h-full overflow-y-scroll bg-slate-100 mb-44'>
         <Poll />
       </div>
       <NavigationBar />
