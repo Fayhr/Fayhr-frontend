@@ -6,10 +6,19 @@ import Link from 'next/link'
 import { BsHeart } from 'react-icons/bs'
 import { BsSend } from 'react-icons/bs'
 
-const Poll = () => {
-  const [comment, setComment] = useState(false);
+interface CommentMsg {
+  comment: string;
+}
+
+const Poll: React.FC = () => {
+  const [comment, setComment] = useState<boolean>(false);
+  const [commentMsg, setCommentMsg] = useState<CommentMsg>({comment: ''});
   const pathname = usePathname();
   const showPoll = pathname === '/home-page/crowdfund-page'
+
+  const handleComment = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCommentMsg({ comment: e.target.value });
+  };
 
   return (
     <div className='h-full w-full px-5 pt-36 text-sm'>
@@ -34,8 +43,8 @@ const Poll = () => {
         </div>
         {
           comment && <div className='w-full'>
-                        <form className='flex items-center gap-2 w-full'>
-                          <input type="text" name="comment" id="comment" className='w-full rounded-full p-1 px-3 outline-1 outline-primary border-2 border-primary' />
+                        <form onSubmit={(e) => {e.preventDefault(); console.log(commentMsg)}} className='flex items-center gap-2 w-full'>
+                          <input type="text" name="comment" id="comment" value={commentMsg.comment} onChange={handleComment} placeholder='write a comment...' className='w-full rounded-full p-1 px-3 outline-1 outline-primary border-2 border-primary' />
                           <button type="submit" className='text-2xl'><BsSend /></button>
                         </form>
                       </div>
