@@ -29,7 +29,7 @@ const CrowdModal: React.FC<ModalProps> = ({ isVisible, onClose, itemDetails }) =
             <p className='text-sm font-semibold mt-1'>N615,511 raised</p>
             <div className='flex gap-2 mt-5'>
               <button className='outline-none border-2 border-green-700 font-bold w-full rounded-full p-2 hover:bg-green-700 hover:text-white'>Share</button>
-              <Link href='/home-page/contribute' className='outline-none border-2 border-green-700 text-center font-bold w-full rounded-full p-2 hover:bg-green-700 hover:text-white'>Contribute</Link>
+              <Link href='/home-page/crowdfund-page/contribute' className='outline-none border-2 border-green-700 text-center font-bold w-full rounded-full p-2 hover:bg-green-700 hover:text-white'>Contribute</Link>
             </div>
             <div className='grid gap-2 mt-5'>
               <div className='flex bg-slate-100 hover:border-2 hover:border-primary rounded-3xl py-3 px-5 justify-between items-center w-full'>
