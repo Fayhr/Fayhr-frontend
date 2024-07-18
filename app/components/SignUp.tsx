@@ -32,26 +32,64 @@ function SignUp() {
       const [accountConnected, setAccountConnected] = useState("");
       const [email, setEmail] = useState("");
       const [isLoading , setIsLoading] = useState(false);
+      const [isSuccess, setIsSuccess] = useState(false);
       const router = useRouter();
       const account: any = useActiveAccount?.();
+
+      useEffect(() => {
+                      const signUp = async () => {
+                        const response = await fetch(
+                          `${process.env.NEXT_PUBLIC_BASE_URL!}/auth/signup`,
+                          {
+                            method: "POST",
+                            headers: {
+                              "Content-Type": "application/json",
+                              "Secret-Key": process.env.NEXT_PUBLIC_SECRET!,
+                            },
+                            body: JSON.stringify({ email, accountConnected }),
+                          }
+                        );
+
+                        const { success } = await response.json();
+
+                        return success;
+                      };
+                      if (account?.address) {
+                        signUp()
+                         .then((success) => setIsSuccess(success))
+                         .catch((error) => console.error(error));
+                      }
+        
+      }, [accountConnected, email, account])
+
 
 
       useEffect(() => {
         setAccountConnected(account && account?.address);
-        if(account){
+
+
+        if(account?.address){
           setIsLoading(true);
         }
+
 
         async function getEmail() {
           const email: any = await getUserEmail({ client });
           setEmail(email && email.toString());
+         
         }
         getEmail();
-        if (account && account.address) {
+        if (account && account.address && isSuccess) {
+          console.log("Success!")
                             
           router.push("/home-page");
         }
-      }, [account, router]);
+
+        // if(account?.address && !isSuccess){
+        //   console.log("Error!");
+        //   setIsLoading(false);
+        // }
+      }, [account, router, isSuccess]);
 
 
     const handleGoBack = () => {

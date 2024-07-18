@@ -1,7 +1,7 @@
-import React from 'react'
-import Link from 'next/link';
-import img from '../../../public/image/Logo_Mark.webp'
-import Image from 'next/image';
+import React from "react";
+import Link from "next/link";
+import img from "../../../public/image/Logo_Mark.webp";
+import Image from "next/image";
 
 interface ModalProps {
   isVisible: boolean;
@@ -14,7 +14,11 @@ interface ModalProps {
   // children: React.ReactNode;
 }
 
-const CrowdModal: React.FC<ModalProps> = ({ isVisible, onClose, itemDetails }) => {
+const CrowdModal: React.FC<ModalProps> = ({
+  isVisible,
+  onClose,
+  itemDetails,
+}) => {
   if (!isVisible || itemDetails) return null;
 
   return (
@@ -31,42 +35,66 @@ const CrowdModal: React.FC<ModalProps> = ({ isVisible, onClose, itemDetails }) =
               <button className='outline-none border-2 border-green-700 font-bold w-full rounded-full p-2 hover:bg-green-700 hover:text-white'>Share</button>
               <Link href='/home-page/crowdfund-page/contribute' className='outline-none border-2 border-green-700 text-center font-bold w-full rounded-full p-2 hover:bg-green-700 hover:text-white'>Contribute</Link>
             </div>
-            <div className='grid gap-2 mt-5'>
-              <div className='flex bg-slate-100 hover:border-2 hover:border-primary rounded-3xl py-3 px-5 justify-between items-center w-full'>
-                <div className='flex gap-3 items-center'>
-                  <Image src={img} alt='profile' width={5} height={5} className='w-10 h-10 rounded-full' />
-                  <div className='text-xs'>
-                    <h1 className='font-bold'>Blacdav</h1>
+            <div className="grid gap-2 mt-5">
+              <div className="flex bg-slate-100 hover:border-2 hover:border-primary rounded-3xl py-3 px-5 justify-between items-center w-full">
+                <div className="flex gap-3 items-center">
+                  <Image
+                    src={img}
+                    alt="profile"
+                    width={5}
+                    height={5}
+                    className="w-10 h-10 rounded-full"
+                  />
+                  <div className="text-xs">
+                    <h1 className="font-bold">Blacdav</h1>
                     <p>9h ago</p>
                   </div>
                 </div>
                 <div>N6,000</div>
               </div>
-              <div className='flex bg-slate-100 hover:border-2 hover:border-primary rounded-3xl py-3 px-5 justify-between items-center w-full'>
-                <div className='flex gap-3 items-center'>
-                  <Image src={img} alt='profile' width={5} height={5} className='w-10 h-10 rounded-full' />
-                  <div className='text-xs'>
-                    <h1 className='font-bold'>Blacdav</h1>
+              <div className="flex bg-slate-100 hover:border-2 hover:border-primary rounded-3xl py-3 px-5 justify-between items-center w-full">
+                <div className="flex gap-3 items-center">
+                  <Image
+                    src={img}
+                    alt="profile"
+                    width={5}
+                    height={5}
+                    className="w-10 h-10 rounded-full"
+                  />
+                  <div className="text-xs">
+                    <h1 className="font-bold">Blacdav</h1>
                     <p>9h ago</p>
                   </div>
                 </div>
                 <div>N6,000</div>
               </div>
-              <div className='flex bg-slate-100 hover:border-2 hover:border-primary rounded-3xl py-3 px-5 justify-between items-center w-full'>
-                <div className='flex gap-3 items-center'>
-                  <Image src={img} alt='profile' width={5} height={5} className='w-10 h-10 rounded-full' />
-                  <div className='text-xs'>
-                    <h1 className='font-bold'>Blacdav</h1>
+              <div className="flex bg-slate-100 hover:border-2 hover:border-primary rounded-3xl py-3 px-5 justify-between items-center w-full">
+                <div className="flex gap-3 items-center">
+                  <Image
+                    src={img}
+                    alt="profile"
+                    width={5}
+                    height={5}
+                    className="w-10 h-10 rounded-full"
+                  />
+                  <div className="text-xs">
+                    <h1 className="font-bold">Blacdav</h1>
                     <p>9h ago</p>
                   </div>
                 </div>
                 <div>N6,000</div>
               </div>
-              <div className='flex bg-slate-100 hover:border-2 hover:border-primary rounded-3xl py-3 px-5 justify-between items-center w-full'>
-                <div className='flex gap-3 items-center'>
-                  <Image src={img} alt='profile' width={5} height={5} className='w-10 h-10 rounded-full' />
-                  <div className='text-xs'>
-                    <h1 className='font-bold'>Blacdav</h1>
+              <div className="flex bg-slate-100 hover:border-2 hover:border-primary rounded-3xl py-3 px-5 justify-between items-center w-full">
+                <div className="flex gap-3 items-center">
+                  <Image
+                    src={img}
+                    alt="profile"
+                    width={5}
+                    height={5}
+                    className="w-10 h-10 rounded-full"
+                  />
+                  <div className="text-xs">
+                    <h1 className="font-bold">Blacdav</h1>
                     <p>9h ago</p>
                   </div>
                 </div>
@@ -77,7 +105,7 @@ const CrowdModal: React.FC<ModalProps> = ({ isVisible, onClose, itemDetails }) =
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CrowdModal
+export default CrowdModal;
