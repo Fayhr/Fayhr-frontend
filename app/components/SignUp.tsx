@@ -79,7 +79,13 @@ function SignUp() {
          
         }
         getEmail();
-        if (account && account.address && isSuccess) {
+        // if (account && account.address && isSuccess) {
+        //   console.log("Success!")
+                            
+        //   router.push("/home-page");
+        // }      
+        
+        if (account && account.address) {
           console.log("Success!")
                             
           router.push("/home-page");
