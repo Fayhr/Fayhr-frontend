@@ -21,7 +21,7 @@ const Poll: React.FC = () => {
   };
 
   return (
-    <div className="h-full w-full px-5 pt-36 text-sm">
+    <div className="h-full w-full px-5 pt-24 text-sm">
       <div className={`${showPoll ? "grid" : "hidden"} gap-2 mb-4`}>
         <Link href="/home-page/notifications">
           <BsBellFill className="text-primary text-4xl mb-2" />
