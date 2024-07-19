@@ -13,11 +13,25 @@ interface CommentMsg {
 const Poll: React.FC = () => {
   const [comment, setComment] = useState<boolean>(false);
   const [commentMsg, setCommentMsg] = useState<CommentMsg>({ comment: "" });
+  const [vote, setVote] = useState({ yes: false, no: false });
+  const [yes, setYes] = useState(0);
+  const [no, setNo] = useState(0);
   const pathname = usePathname();
   const showPoll = pathname === "/home-page/crowdfund-page";
 
   const handleComment = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCommentMsg({ comment: e.target.value });
+  };
+
+  const handleVote = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+    const target = e.target as HTMLSpanElement;
+    if (target.dataset.value === "yes") {
+      setYes(yes + 1);
+      setVote({ yes: true, no: false });
+    } else if (target.dataset.value === "no") {
+      setNo(no + 1);
+      setVote({ yes: false, no: true });
+    }
   };
 
   return (
@@ -40,11 +54,74 @@ const Poll: React.FC = () => {
           <p>current price is 78k</p>
         </div>
         <div className="grid gap-1">
-          <p className="flex bg-white w-full h-10 rounded-t-lg items-center overflow-hidden">
-            <span className="bg-primary w-3/4 h-10"></span>
+          <p className="flex gap-x-3 bg-white w-full h-10 rounded-t-lg items-center overflow-hidden">
+            <span
+              data-value="yes"
+              onClick={handleVote}
+              className="cursor-pointer select-none"
+            >
+              Yes:{" "}
+            </span>
+            {/* w-3/4 */}
+            <span
+              className={`bg-primary  ${
+                yes === 0
+                  ? "w-0"
+                  : yes > 0 && yes <= 10
+                  ? "w-[10%]"
+                  : yes > 10 && yes <= 20
+                  ? "w-[20%]"
+                  : yes > 20 && yes <= 30
+                  ? "w-[30%]"
+                  : yes > 30 && yes <= 40
+                  ? "w-[40%]"
+                  : yes > 40 && yes <= 50
+                  ? "w-[50%]"
+                  : yes > 50 && yes <= 60
+                  ? "w-[60%]"
+                  : yes > 60 && yes <= 70
+                  ? "w-[70%]"
+                  : yes > 70 && yes <= 80
+                  ? "W-[80%]"
+                  : yes > 80 && yes <= 90
+                  ? "W-[90%]"
+                  : "W-[100%]"
+              } h-10`}
+            ></span>
           </p>
-          <p className="flex bg-white w-full h-10 rounded-b-lg items-center overflow-hidden">
-            <span className="bg-primary w-1/2 h-10"></span>
+          <p className="flex gap-x-3 bg-white w-full h-10 rounded-b-lg items-center overflow-hidden">
+            <span
+              data-value="no"
+              onClick={handleVote}
+              className="cursor-pointer select-none"
+            >
+              No:{" "}
+            </span>
+            <span
+              className={`bg-primary  ${
+                no === 0
+                  ? "w-0"
+                  : no > 0 && no <= 10
+                  ? "w-[10%]"
+                  : no > 10 && no <= 20
+                  ? "w-[20%]"
+                  : no > 20 && no <= 30
+                  ? "w-[30%]"
+                  : no > 30 && no <= 40
+                  ? "w-[40%]"
+                  : no > 40 && no <= 50
+                  ? "w-[50%]"
+                  : no > 50 && no <= 60
+                  ? "w-[60%]"
+                  : no > 60 && no <= 70
+                  ? "w-[70%]"
+                  : no > 70 && no <= 80
+                  ? "W-[80%]"
+                  : no > 80 && no <= 90
+                  ? "W-[90%]"
+                  : "W-[100%]"
+              } h-10`}
+            ></span>
           </p>
         </div>
         <div className="flex items-center gap-2 *:flex *:items-center *:gap-1">
