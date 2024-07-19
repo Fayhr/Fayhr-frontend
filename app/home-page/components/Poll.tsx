@@ -64,7 +64,7 @@ const Poll: React.FC = () => {
             </span>
             {/* w-3/4 */}
             <span
-              className={`bg-primary  ${
+              className={`bg-primary transition-all duration-300 ${
                 yes === 0
                   ? "w-0"
                   : yes > 0 && yes <= 10
@@ -98,7 +98,7 @@ const Poll: React.FC = () => {
               No:{" "}
             </span>
             <span
-              className={`bg-primary  ${
+              className={`bg-primary transition-all duration-300 ${
                 no === 0
                   ? "w-0"
                   : no > 0 && no <= 10
