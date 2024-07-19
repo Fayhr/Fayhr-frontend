@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-// import ThirdwebWallet from "./ThirdwebWallet"
+import ThirdwebWallet from "./ThirdwebWallet"
 
 
 export const metadata: Metadata = {
@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <main className="w-full h-full">
 
-        {/* <ThirdwebWallet /> */}
+        <ThirdwebWallet />
         {children}
     
     </main>

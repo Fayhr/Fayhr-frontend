@@ -59,7 +59,7 @@ const delegateNotComplete = (err : any) => {
         <span>Contribute</span>
       </div>
 
-      <div className="w-fit h-fit fixed top-2 right-2">
+      {/* <div className="w-fit h-fit fixed top-2 right-2">
         <ConnectButton
           client={client}
           chain={chain}
@@ -78,7 +78,7 @@ const delegateNotComplete = (err : any) => {
             showThirdwebBranding: false,
           }}
         />
-      </div>
+      </div> */}
       <div className="px-5">
         <h1 className="font-bold">Description</h1>
         <p className="text-sm mt-3">
@@ -138,7 +138,7 @@ const delegateNotComplete = (err : any) => {
             Approve Token
           </TransactionButton>  
           
-          <TransactionButton
+          {/* <TransactionButton
             transaction={() => {
               return prepareContractCall({
                 contract: CONTRACT,
@@ -158,7 +158,7 @@ const delegateNotComplete = (err : any) => {
             className="bg-primary text-white p-3 rounded-full"
           >
             Continue
-          </TransactionButton>
+          </TransactionButton> */}
         </div>
       </div>
       <NavigationBar />
