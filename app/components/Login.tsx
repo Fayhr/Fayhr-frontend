@@ -1,63 +1,111 @@
 "use client";
 import { useEffect, useState } from "react";
-import Link from "next/link";
-import { ConnectButton, useActiveAccount, lightTheme } from "thirdweb/react";
-import Image from "next/image";
-import {
-  TransactionButton,
-  useReadContract,
-  AutoConnect,
-} from "thirdweb/react";
-import {inAppWallet } from "thirdweb/wallets";
-import {client, chain, CONTRACT} from "../utils/constant"
 import { MdArrowBackIosNew } from "react-icons/md";
-import { MdOutlineMailOutline } from "react-icons/md";
-import { LuLock } from "react-icons/lu";
-import { LuUnlock } from "react-icons/lu";
-import { FaRegEyeSlash } from "react-icons/fa";
-import { FaRegEye } from "react-icons/fa";
-import { FcGoogle } from "react-icons/fc";
 import { useRouter } from "next/navigation";
+import { ConnectButton, useActiveAccount, lightTheme } from "thirdweb/react";
+import { inAppWallet } from "thirdweb/wallets";
+import { client, chain } from "../utils/constant";
 import { getUserEmail } from "thirdweb/wallets/in-app";
 import Loader from "./Loader";
-
+import { Bounce, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const wallets = [
   inAppWallet({
     auth: {
-      options: ["google", "apple", "facebook"],
+      options: ["google", "apple"],
     },
   }),
 ];
 
+
+
 function Login() {
- const [accountConnected, setAccountConnected] = useState("");
- const [isLoading, setIsLoading] = useState(false);
- const [email, setEmail] = useState("");
- const router = useRouter();
- const account: any = useActiveAccount?.();
+   const [accountConnected, setAccountConnected] = useState("");
+   const [email, setEmail] = useState("");
+   const [isLoading, setIsLoading] = useState(false);
+   const [isSuccess, setIsSuccess] = useState(false);
+   const [isError, setIsError] = useState(false);
+   const router = useRouter();
+   const account: any = useActiveAccount?.();
 
- useEffect(() => {
-   setAccountConnected(account && account?.address);
-  if (account) {
-      setIsLoading(true);
-  }
+      const logInError = () => {
+        toast("Account Does not Exist, 📛Disconnect wallet and Sign Up!", {
+          position: "top-left",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      };
 
-   if (account && account.address) {
-     router.push("/home-page");
+
+   useEffect(() => {
+     const signUp = async () => {
+       const response = await fetch(
+         `${process.env.NEXT_PUBLIC_BASE_URL}/auth/login`,
+         {
+           method: "POST",
+           headers: {
+             "Content-Type": "application/json",
+             Secret: process.env.NEXT_PUBLIC_SECRET!,
+           },
+           body: JSON.stringify({
+             address: accountConnected,
+           }),
+         }
+       );
+
+               const data = await response.json();
+                  console.log("data", data);
+                  return data;
+                };
+
+                    
+                      if (account?.address) {
+                        signUp()
+                         .then((data) => setIsSuccess(data?.success))
+
+                         if(!isSuccess){
+                           setIsError(true);
+                         }
+                        
+                      }
+        
+      }, [account, accountConnected, email, isSuccess])
+
+
+
+      useEffect(() => {
+        setAccountConnected(account && account?.address);
+
+        if (account?.address) {
+          setIsLoading(true);
+        }
+
+        if (account && account.address && isSuccess) {
+          console.log("Success!");
+
+          router.push("/home-page");
+        }
+
+        if (isError) {
+          setIsLoading(false);
+          // logInError();
+        }
+      }, [account, router, isSuccess, isError]);
+      
+   const handleGoBack = () => {
+     router.back();
+   };
+
+   if (isLoading) {
+     return <Loader />;
    }
- }, [account, router]);
-
-
-
-
-  const handleGoBack = () => {
-    router.back();
-  };
-
-      if (isLoading) {
-        return <Loader />;
-      }
 
   return (
     <form className="w-full h-full  gap-y-[0.45rem] flex flex-col items-center">
@@ -67,7 +115,7 @@ function Login() {
       />
 
       <p className="text-[1.0625rem] font-[800] mt-6 mb-12">Log in</p>
-      <AutoConnect client={client} timeout={10000} wallets={wallets} />
+
       <ConnectButton
         client={client}
         chain={chain}
@@ -85,6 +133,20 @@ function Login() {
           title: "Fahyr",
           showThirdwebBranding: false,
         }}
+      />
+
+      <ToastContainer
+        position="top-left"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Bounce}
       />
     </form>
   );

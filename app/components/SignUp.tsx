@@ -1,29 +1,19 @@
 "use client";
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { MdArrowBackIosNew } from "react-icons/md";
-import { BsPerson } from "react-icons/bs";
-import { MdOutlineMailOutline } from "react-icons/md";
-import { LuLock } from "react-icons/lu";
-import { LuUnlock } from "react-icons/lu";
-import { FaRegEyeSlash } from "react-icons/fa";
-import { FaRegEye } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { ConnectButton, useActiveAccount, lightTheme } from "thirdweb/react";
-import {
-  TransactionButton,
-  useReadContract,
-  AutoConnect,
-} from "thirdweb/react";
 import { inAppWallet } from "thirdweb/wallets";
-import { client, chain, CONTRACT } from "../utils/constant";
+import { client, chain } from "../utils/constant";
 import { getUserEmail } from "thirdweb/wallets/in-app";
 import Loader from "./Loader";
+import { Bounce, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const wallets = [
   inAppWallet({
     auth: {
-      options: ["google", "apple", "facebook"],
+      options: ["google", "apple"],
     },
   }),
 ];
@@ -33,34 +23,62 @@ function SignUp() {
       const [email, setEmail] = useState("");
       const [isLoading , setIsLoading] = useState(false);
       const [isSuccess, setIsSuccess] = useState(false);
+      const [isError, setIsError] = useState(false);
+      const [errorProcessed, setErrorProcessed] = useState(false);
+
+
       const router = useRouter();
       const account: any = useActiveAccount?.();
 
+
+      const signUpError = () => {
+        toast("Account Already Exist, 📛Disconnect wallet and Login!", {
+          position: "top-left",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+        });
+      };
+
       useEffect(() => {
-                      const signUp = async () => {
-                        const response = await fetch(
-                          `${process.env.NEXT_PUBLIC_BASE_URL!}/auth/signup`,
-                          {
-                            method: "POST",
-                            headers: {
-                              "Content-Type": "application/json",
-                              "Secret-Key": process.env.NEXT_PUBLIC_SECRET!,
-                            },
-                            body: JSON.stringify({ email, accountConnected }),
-                          }
-                        );
+                const signUp = async () => {
+                  const response = await fetch(
+                    `${process.env.NEXT_PUBLIC_BASE_URL}/auth/signup`,
+                    {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                        Secret: process.env.NEXT_PUBLIC_SECRET!,
+                      },
+                      body: JSON.stringify({
+                        email,
+                        address: accountConnected,
+                      }),
+                    }
+                  );
 
-                        const { success } = await response.json();
+                  const data = await response.json();
+                  console.log("data", data);
+                  return data;
+                };
 
-                        return success;
-                      };
+                    
                       if (account?.address) {
                         signUp()
-                         .then((success) => setIsSuccess(success))
-                         .catch((error) => console.error(error));
+                         .then((data) => setIsSuccess(data?.success))
+
+                         if(!isSuccess){
+                           setIsError(true);
+                         }
+                        
                       }
         
-      }, [accountConnected, email, account])
+      }, [account, accountConnected, email, isSuccess])
 
 
 
@@ -79,23 +97,21 @@ function SignUp() {
          
         }
         getEmail();
-        // if (account && account.address && isSuccess) {
-        //   console.log("Success!")
-                            
-        //   router.push("/home-page");
-        // }      
-        
-        if (account && account.address) {
+        if (account && account.address && isSuccess) {
           console.log("Success!")
                             
           router.push("/home-page");
+        }      
+        
+
+        if(isError){
+          setIsLoading(false);                                   
+          signUpError();
+                                     
         }
 
-        // if(account?.address && !isSuccess){
-        //   console.log("Error!");
-        //   setIsLoading(false);
-        // }
-      }, [account, router, isSuccess]);
+     
+      }, [account, router, isSuccess, isError]);
 
 
     const handleGoBack = () => {
@@ -112,7 +128,6 @@ function SignUp() {
         className="absolute top-4 left-4 cursor-pointer"
       />
       <p className="text-[1.0625rem] font-[800] mt-6 mb-12">Create account</p>
-
 
       <ConnectButton
         client={client}
@@ -131,6 +146,19 @@ function SignUp() {
           title: "Fahyr",
           showThirdwebBranding: false,
         }}
+      />
+      <ToastContainer
+        position="top-left"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Bounce}
       />
     </div>
   );
