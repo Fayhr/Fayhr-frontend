@@ -1,7 +1,7 @@
 import React from 'react'
 import { BsPlus } from 'react-icons/bs'
 import Image from 'next/image'
-import logo from '@/public/image/Logo_Mark.webp'
+import logo from '@/public/image/TLogoB.webp'
 // import icon from '@/public/image/Word_mark.webp'
 
 const Search = () => {

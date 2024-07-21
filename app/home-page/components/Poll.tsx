@@ -1,13 +1,42 @@
-import React, { useState } from "react";
+import React, { useReducer, useState, ChangeEvent, FormEvent, MouseEvent } from "react";
 import Comments from "./Comments";
-import { BsBellFill } from "react-icons/bs";
+import { BsBellFill, BsHeart, BsSend } from "react-icons/bs";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { BsHeart } from "react-icons/bs";
-import { BsSend } from "react-icons/bs";
 
 interface CommentMsg {
   comment: string;
+}
+
+interface Comment {
+  id: number;
+  comment: string;
+}
+
+type State = Comment[];
+
+interface Action {
+  type: string;
+  payload?: {
+    comment: string;
+  };
+}
+
+const ACTIONS = {
+  ADD_COMMENT: 'add-comment',
+};
+
+function reducer(state: State, action: Action): State {
+  switch (action.type) {
+    case ACTIONS.ADD_COMMENT:
+      return [newComment(action.payload!.comment), ...state];
+    default:
+      return state;
+  }
+}
+
+function newComment(comment: string): Comment {
+  return { id: Date.now(), comment };
 }
 
 const Poll: React.FC = () => {
@@ -16,14 +45,16 @@ const Poll: React.FC = () => {
   const [vote, setVote] = useState({ yes: false, no: false });
   const [yes, setYes] = useState(0);
   const [no, setNo] = useState(0);
+
+  const [commentList, dispatch] = useReducer(reducer, [] as State);
   const pathname = usePathname();
   const showPoll = pathname === "/home-page/crowdfund-page";
 
-  const handleComment = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleComment = (e: ChangeEvent<HTMLInputElement>) => {
     setCommentMsg({ comment: e.target.value });
   };
 
-  const handleVote = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+  const handleVote = (e: MouseEvent<HTMLSpanElement>) => {
     const target = e.target as HTMLSpanElement;
     if (target.dataset.value === "yes") {
       setYes(yes + 1);
@@ -32,6 +63,12 @@ const Poll: React.FC = () => {
       setNo(no + 1);
       setVote({ yes: false, no: true });
     }
+  };
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch({ type: ACTIONS.ADD_COMMENT, payload: { comment: commentMsg.comment } });
+    setCommentMsg({ comment: "" });
   };
 
   return (
@@ -62,7 +99,6 @@ const Poll: React.FC = () => {
             >
               Yes:{" "}
             </span>
-            {/* w-3/4 */}
             <span
               className={`bg-primary transition-all duration-300 ${
                 yes === 0
@@ -131,16 +167,13 @@ const Poll: React.FC = () => {
           </p>
           <p className="w-1 h-1 rounded-full bg-black"></p>
           <p>
-            26<span onClick={() => setComment(!comment)}>comment</span>
+            26<span onClick={() => setComment(!comment)}> comment</span>
           </p>
         </div>
         {comment && (
           <div className="w-full">
             <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                console.log(commentMsg);
-              }}
+              onSubmit={handleSubmit}
               className="flex items-center gap-2 w-full"
             >
               <input
@@ -158,6 +191,13 @@ const Poll: React.FC = () => {
             </form>
           </div>
         )}
+        <div className="w-full mt-4">
+          {commentList.map((comment) => (
+            <div key={comment.id} className="border-b border-gray-300 py-2">
+              {comment.comment}
+            </div>
+          ))}
+        </div>
         <Comments />
       </div>
     </div>
