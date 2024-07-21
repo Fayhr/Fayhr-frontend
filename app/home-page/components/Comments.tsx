@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { BsHeart } from "react-icons/bs";
 import { BsSend } from "react-icons/bs";
 import Image from "next/image";
-import profile from "../../../public/image/TLogoB.webp";
+
 
 interface ReplyMsg {
   reply: string;
@@ -22,7 +22,7 @@ const Comments: React.FC = () => {
     <div className="grid gap-2 mt-3 text-sm pb-3">
       <div className="flex items-center gap-2">
         <Image
-          src={profile}
+          src="/image/TLogoB.webp"
           alt="user profile"
           className="bg-primary w-9 h-9 rounded-full"
         />

@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import img from "../../../public/image/Logo_Mark.webp";
+
 import Image from "next/image";
 
 interface ModalProps {
@@ -30,7 +30,7 @@ const CrowdModal: React.FC<ModalProps> = ({
           </p>
           <div className="h-full pb-20 overflow-y-scroll no-scroll">
             <Image
-              src={img}
+              src="/image/Logo_Mark.webp"
               alt="item image"
               width={20}
               placeholder="blur"
@@ -57,7 +57,7 @@ const CrowdModal: React.FC<ModalProps> = ({
               <div className="flex bg-slate-100 hover:border-2 hover:border-primary rounded-3xl py-3 px-5 justify-between items-center w-full">
                 <div className="flex gap-3 items-center">
                   <Image
-                    src={img}
+                    src="/image/Logo_Mark.webp"
                     alt="profile"
                     width={5}
                     height={5}
@@ -73,7 +73,7 @@ const CrowdModal: React.FC<ModalProps> = ({
               <div className="flex bg-slate-100 hover:border-2 hover:border-primary rounded-3xl py-3 px-5 justify-between items-center w-full">
                 <div className="flex gap-3 items-center">
                   <Image
-                    src={img}
+                    src="/image/Logo_Mark.webp"
                     alt="profile"
                     width={5}
                     height={5}
@@ -89,7 +89,7 @@ const CrowdModal: React.FC<ModalProps> = ({
               <div className="flex bg-slate-100 hover:border-2 hover:border-primary rounded-3xl py-3 px-5 justify-between items-center w-full">
                 <div className="flex gap-3 items-center">
                   <Image
-                    src={img}
+                    src="/image/Logo_Mark.webp"
                     alt="profile"
                     width={5}
                     height={5}
@@ -105,7 +105,7 @@ const CrowdModal: React.FC<ModalProps> = ({
               <div className="flex bg-slate-100 hover:border-2 hover:border-primary rounded-3xl py-3 px-5 justify-between items-center w-full">
                 <div className="flex gap-3 items-center">
                   <Image
-                    src={img}
+                    src="/image/Logo_Mark.webp"
                     alt="profile"
                     width={5}
                     height={5}

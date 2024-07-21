@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import Image from "next/image";
-import logo from "../../../public/image/Logo_Mark.webp";
 import CrowdModal from "../modal/CrowdModal";
 
 const Items: React.FC = () => {
@@ -26,7 +25,7 @@ const Items: React.FC = () => {
           className="flex gap-2 items-center"
         >
           <Image
-            src={logo}
+            src="/image/Logo_Mark.webp"
             alt="item image"
             width={200}
             height={200}
