@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { BsHeart } from "react-icons/bs";
 import { BsSend } from "react-icons/bs";
 import Image from "next/image";
-import profile from "../../../public/image/Logo_Mark.webp";
+import profile from "../../../public/image/TLogoB.webp";
 
 interface ReplyMsg {
   reply: string;

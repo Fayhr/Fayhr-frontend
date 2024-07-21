@@ -53,8 +53,8 @@ const delegateNotComplete = (err : any) => {
     method: "isActive",
   });
   return (
-    <div>
-      <div className="flex *:font-semibold gap-3 items-center p-5">
+    <div className='bg-white text-black'>
+      <div className='flex *:font-semibold gap-3 items-center p-5'>
         <MdArrowBack onClick={() => router.back()} />
         <span>Contribute</span>
       </div>
