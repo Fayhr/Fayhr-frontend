@@ -104,11 +104,10 @@ function SignUp() {
         }      
         
 
-        if(isError){
-          setIsLoading(false);                                   
-          signUpError();
-                                     
-        }
+       if (account?.address && isError) {
+         setIsLoading(false);
+         signUpError();
+       }
 
      
       }, [account, router, isSuccess, isError]);

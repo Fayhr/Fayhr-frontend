@@ -18,100 +18,98 @@ const wallets = [
   }),
 ];
 
-
-
 function Login() {
-   const [accountConnected, setAccountConnected] = useState("");
-   const [email, setEmail] = useState("");
-   const [isLoading, setIsLoading] = useState(false);
-   const [isSuccess, setIsSuccess] = useState(false);
-   const [isError, setIsError] = useState(false);
-   const router = useRouter();
-   const account: any = useActiveAccount?.();
+  const [accountConnected, setAccountConnected] = useState("");
+  const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const router = useRouter();
+  const account = useActiveAccount();
 
-      const logInError = () => {
-        toast("Account Does not Exist, 📛Disconnect wallet and Sign Up!", {
-          position: "top-left",
-          autoClose: 5000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Bounce,
-        });
-      };
+  const logInError = () => {
+    toast("Account Does not Exist, 📛Disconnect wallet and Sign Up!", {
+      position: "top-left",
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
+  };
 
+  useEffect(() => {
+    const login = async () => {
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/auth/login`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Secret: process.env.NEXT_PUBLIC_SECRET!,
+            },
+            body: JSON.stringify({
+              address: accountConnected,
+            }),
+          }
+        );
 
-   useEffect(() => {
-     const signUp = async () => {
-       const response = await fetch(
-         `${process.env.NEXT_PUBLIC_BASE_URL}/auth/login`,
-         {
-           method: "POST",
-           headers: {
-             "Content-Type": "application/json",
-             Secret: process.env.NEXT_PUBLIC_SECRET!,
-           },
-           body: JSON.stringify({
-             address: accountConnected,
-           }),
-         }
-       );
+        const data = await response.json();
+        console.log("data", data);
+        return data;
+      } catch (error) {
+        console.error("Login error", error);
+        return { success: false };
+      }
+    };
 
-               const data = await response.json();
-                  console.log("data", data);
-                  return data;
-                };
-
-                    
-                      if (account?.address) {
-                        signUp()
-                         .then((data) => setIsSuccess(data?.success))
-
-                         if(!isSuccess){
-                           setIsError(true);
-                         }
-                        
-                      }
-        
-      }, [account, accountConnected, email, isSuccess])
-
-
-
-      useEffect(() => {
-        setAccountConnected(account && account?.address);
-
-        if (account?.address) {
-          setIsLoading(true);
-        }
-
-        if (account && account.address && isSuccess) {
-          console.log("Success!");
-
-          router.push("/home-page");
-        }
-
-        if (isError) {
+    if (account?.address && accountConnected) {
+      setIsLoading(true);
+      login()
+        .then((data) => {
+          setIsSuccess(data.success);
           setIsLoading(false);
-          // logInError();
-        }
-      }, [account, router, isSuccess, isError]);
-      
-   const handleGoBack = () => {
-     router.back();
-   };
+          if (!data.success) {
+            setIsError(true);
+          }
+        })
+        .catch(() => {
+          setIsError(true);
+          setIsLoading(false);
+        });
+    }
+  }, [account, accountConnected]);
 
-   if (isLoading) {
-     return <Loader />;
-   }
+  useEffect(() => {
+    setAccountConnected(account?.address || "");
+
+    if (account?.address && isSuccess) {
+      console.log("Success!");
+      router.push("/home-page");
+    }
+
+    if (account?.address && isError) {
+      logInError();
+    }
+  }, [account, router, isSuccess, isError]);
+
+  const handleGoBack = () => {
+    router.back();
+  };
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
-    <form className="w-full h-full  gap-y-[0.45rem] flex flex-col items-center">
+    <form className="w-full h-full gap-y-[0.45rem] flex flex-col items-center">
       <MdArrowBackIosNew
         onClick={handleGoBack}
-        className="absolute top-4  left-4 cursor-pointer"
+        className="absolute top-4 left-4 cursor-pointer"
       />
 
       <p className="text-[1.0625rem] font-[800] mt-6 mb-12">Log in</p>
