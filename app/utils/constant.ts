@@ -8,25 +8,14 @@ export const client = createThirdwebClient({
 
 export const chain = defineChain(4202);
 
-const contractAddress = "0xAFE36892a12da935cd1006dB78282a5E128a6673";
-const contractAbi = 
- [
+const contractAddress = "0x07D053e6bbaeBBB9f8cC1217B4d6A65155D7538B";
+const contractAbi = [
     {
       type: "constructor",
-      inputs: [
-        { name: "_admin", type: "address", internalType: "address" },
-        { name: "_tokenAddress", type: "address", internalType: "address" },
-      ],
+      inputs: [{ name: "_admin", type: "address", internalType: "address" }],
       stateMutability: "nonpayable",
     },
     { type: "receive", stateMutability: "payable" },
-    {
-      type: "function",
-      name: "approveToken",
-      inputs: [],
-      outputs: [],
-      stateMutability: "nonpayable",
-    },
     {
       type: "function",
       name: "cancelCrowdfund",
@@ -38,7 +27,7 @@ const contractAbi =
     },
     {
       type: "function",
-      name: "claimToken",
+      name: "claimEth",
       inputs: [
         { name: "crowdfundId", type: "uint256", internalType: "uint256" },
       ],
@@ -94,20 +83,13 @@ const contractAbi =
     },
     {
       type: "function",
-      name: "deapproveToken",
-      inputs: [],
-      outputs: [],
-      stateMutability: "nonpayable",
-    },
-    {
-      type: "function",
-      name: "delegateToken",
+      name: "delegateEth",
       inputs: [
         { name: "crowdfundId", type: "uint256", internalType: "uint256" },
         { name: "_slotUnit", type: "uint256", internalType: "uint256" },
       ],
       outputs: [],
-      stateMutability: "nonpayable",
+      stateMutability: "payable",
     },
     {
       type: "function",
@@ -224,14 +206,22 @@ const contractAbi =
     },
     {
       type: "function",
-      name: "receiveToken",
-      inputs: [{ name: "amount", type: "uint256", internalType: "uint256" }],
+      name: "restartCanceledCrowdfund",
+      inputs: [
+        { name: "crowdfundId", type: "uint256", internalType: "uint256" },
+        { name: "_slot", type: "uint256", internalType: "uint256" },
+        { name: "_startTime", type: "uint256", internalType: "uint256" },
+        { name: "_endTime", type: "uint256", internalType: "uint256" },
+        { name: "_softCap", type: "uint256", internalType: "uint256" },
+        { name: "_hardCap", type: "uint256", internalType: "uint256" },
+        { name: "verdict", type: "bool", internalType: "bool" },
+      ],
       outputs: [],
       stateMutability: "nonpayable",
     },
     {
       type: "function",
-      name: "restartCanceledCrowdfund",
+      name: "restartCrowdfund",
       inputs: [
         { name: "crowdfundId", type: "uint256", internalType: "uint256" },
         { name: "_slot", type: "uint256", internalType: "uint256" },
@@ -256,20 +246,6 @@ const contractAbi =
         { name: "_hardCap", type: "uint256", internalType: "uint256" },
         { name: "verdict", type: "bool", internalType: "bool" },
       ],
-      outputs: [],
-      stateMutability: "nonpayable",
-    },
-    {
-      type: "function",
-      name: "tokenAddress",
-      inputs: [],
-      outputs: [{ name: "", type: "address", internalType: "address" }],
-      stateMutability: "view",
-    },
-    {
-      type: "function",
-      name: "tokenFaucet",
-      inputs: [{ name: "amount", type: "uint256", internalType: "uint256" }],
       outputs: [],
       stateMutability: "nonpayable",
     },
@@ -438,35 +414,16 @@ const contractAbi =
     },
     {
       type: "event",
-      name: "PollCreated",
+      name: "DebugLog",
       inputs: [
         {
-          name: "id",
-          type: "uint256",
-          indexed: false,
-          internalType: "uint256",
-        },
-        {
-          name: "name",
+          name: "message",
           type: "string",
           indexed: false,
           internalType: "string",
         },
-      ],
-      anonymous: false,
-    },
-    {
-      type: "event",
-      name: "TokenApproval",
-      inputs: [
         {
-          name: "by",
-          type: "address",
-          indexed: false,
-          internalType: "address",
-        },
-        {
-          name: "amount",
+          name: "value",
           type: "uint256",
           indexed: false,
           internalType: "uint256",
@@ -476,7 +433,7 @@ const contractAbi =
     },
     {
       type: "event",
-      name: "TokenClaimed",
+      name: "EthClaimed",
       inputs: [
         {
           name: "id",
@@ -495,26 +452,7 @@ const contractAbi =
     },
     {
       type: "event",
-      name: "TokenDeapproval",
-      inputs: [
-        {
-          name: "by",
-          type: "address",
-          indexed: false,
-          internalType: "address",
-        },
-        {
-          name: "amount",
-          type: "uint256",
-          indexed: false,
-          internalType: "uint256",
-        },
-      ],
-      anonymous: false,
-    },
-    {
-      type: "event",
-      name: "TokenDelegated",
+      name: "EthDelegated",
       inputs: [
         {
           name: "id",
@@ -539,10 +477,10 @@ const contractAbi =
     },
     {
       type: "event",
-      name: "TokenFaucetSent",
+      name: "NonFunctionDeposit",
       inputs: [
         {
-          name: "to",
+          name: "sender",
           type: "address",
           indexed: false,
           internalType: "address",
@@ -558,19 +496,19 @@ const contractAbi =
     },
     {
       type: "event",
-      name: "TokensReceived",
+      name: "PollCreated",
       inputs: [
         {
-          name: "from",
-          type: "address",
-          indexed: false,
-          internalType: "address",
-        },
-        {
-          name: "amount",
+          name: "id",
           type: "uint256",
           indexed: false,
           internalType: "uint256",
+        },
+        {
+          name: "name",
+          type: "string",
+          indexed: false,
+          internalType: "string",
         },
       ],
       anonymous: false,
@@ -586,25 +524,6 @@ const contractAbi =
           internalType: "address",
         },
         { name: "vote", type: "bool", indexed: false, internalType: "bool" },
-      ],
-      anonymous: false,
-    },
-    {
-      type: "event",
-      name: "nonFunctionDeposit",
-      inputs: [
-        {
-          name: "sender",
-          type: "address",
-          indexed: false,
-          internalType: "address",
-        },
-        {
-          name: "amount",
-          type: "uint256",
-          indexed: false,
-          internalType: "uint256",
-        },
       ],
       anonymous: false,
     },

@@ -23,6 +23,8 @@ const Comments: React.FC = () => {
       <div className="flex items-center gap-2">
         <Image
           src="/image/TLogoB.webp"
+          width={800}
+          height={800}
           alt="user profile"
           className="bg-primary w-9 h-9 rounded-full"
         />

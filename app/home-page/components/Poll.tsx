@@ -3,6 +3,12 @@ import Comments from "./Comments";
 import { BsBellFill, BsHeart, BsSend } from "react-icons/bs";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { TransactionButton, useReadContract } from "thirdweb/react";
+import { prepareContractCall, toWei } from "thirdweb";
+import { CONTRACT } from "../../utils/constant";
+import { Bounce, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 interface CommentMsg {
   comment: string;
@@ -71,6 +77,33 @@ const Poll: React.FC = () => {
     setCommentMsg({ comment: "" });
   };
 
+    const voteComplete = () => {
+      toast(`Success ✅`, {
+        position: "top-left",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    };
+    const voteNotComplete = (err: any) => {
+      toast(`📛 ${err}`, {
+        position: "top-left",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    };
+
   return (
     <div className="h-full w-full px-5 pt-24 text-sm">
       <div className={`${showPoll ? "grid" : "hidden"} gap-2 mb-4`}>
@@ -97,7 +130,22 @@ const Poll: React.FC = () => {
               onClick={handleVote}
               className="cursor-pointer select-none"
             >
-              Yes:{" "}
+              <TransactionButton
+                transaction={() => {
+                  return prepareContractCall({
+                    contract: CONTRACT,
+                    method: "vote",
+                    params: [BigInt(2), true],
+                    
+                  });
+                }}
+                onError={(err) => voteNotComplete(err)}
+                onTransactionConfirmed={() => voteComplete()}
+                style={{ backgroundColor: "#01A8F6", color: "#ffffff" }}
+                className="bg-primary text-white p-3 rounded-full"
+              >
+                Vote
+              </TransactionButton>
             </span>
             <span
               className={`bg-primary transition-all duration-300 ${
@@ -125,7 +173,7 @@ const Poll: React.FC = () => {
               } h-10`}
             ></span>
           </p>
-          <p className="flex gap-x-3 bg-white w-full h-10 rounded-b-lg items-center overflow-hidden">
+          {/* <p className="flex gap-x-3 bg-white w-full h-10 rounded-b-lg items-center overflow-hidden">
             <span
               data-value="no"
               onClick={handleVote}
@@ -158,7 +206,7 @@ const Poll: React.FC = () => {
                   : "W-[100%]"
               } h-10`}
             ></span>
-          </p>
+          </p> */}
         </div>
         <div className="flex items-center gap-2 *:flex *:items-center *:gap-1">
           <p>

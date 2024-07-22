@@ -25,7 +25,7 @@ function ThirdwebWallet() {
       }
           
   return (
-    <div className="w-fit h-fit fixed top-2 right-2 z-50">
+    <div className="w-fit h-fit fixed top-[6.5rem] right-2 z-50">
       <ConnectButton
         client={client}
         chain={chain}

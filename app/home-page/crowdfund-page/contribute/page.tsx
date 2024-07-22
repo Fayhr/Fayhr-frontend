@@ -5,80 +5,53 @@ import NavigationBar from '../../components/NavigationBar'
 import { useRouter } from 'next/navigation'
 import { TransactionButton, useReadContract } from "thirdweb/react";
 import { prepareContractCall, toWei } from "thirdweb";
-import { CONTRACT, client, chain } from "../../../utils/constant";
-import { ConnectButton, useActiveAccount, lightTheme } from "thirdweb/react";
-import { inAppWallet } from "thirdweb/wallets";
+import { CONTRACT} from "../../../utils/constant";
+import { Bounce, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const wallets = [
-  inAppWallet({
-    auth: {
-      options: ["google", "apple", "facebook"],
-    },
-  }),
-];
 const Page = () => {
   const [portion, setPortion] = useState(1);
   const [price, setPrice] = useState(400);
   const constantId = 1;
+  const amount = 0.01;
 
-  useEffect(() => {
-    const approveToken = () => {
 
-      prepareContractCall({
-        contract: CONTRACT,
-        method: "approveToken",
-      })
-
-      console.log("Token Approved!");
-    }
-
-    approveToken();
-  }, [])
-  // const tp = ;
-  // const [transportation, setTransportation] = useState(price * 0.1);
   const router = useRouter();
 
   const delegateComplete = () => {
-    window.alert("success!");
-  }
-const delegateNotComplete = (err : any) => {
-    window.alert(`no success! ${err.message}`);
-  }
-  const {
-    data: isActive,
-    isLoading: loadingPrice,
-    refetch: pricefetch,
-  } = useReadContract({
-    contract: CONTRACT,
-    method: "isActive",
-  });
+    toast(`Success ✅`, {
+      position: "top-left",
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
+  };
+const delegateNotComplete = (err: any) => {
+       toast(`📛 ${err}`, {
+         position: "top-left",
+         autoClose: 5000,
+         hideProgressBar: true,
+         closeOnClick: true,
+         pauseOnHover: true,
+         draggable: true,
+         progress: undefined,
+         theme: "light",
+         transition: Bounce,
+       });
+     };
+  
   return (
-    <div className='bg-white text-black'>
-      <div className='flex *:font-semibold gap-3 items-center p-5'>
+    <div className="bg-white text-black">
+      <div className="flex *:font-semibold gap-3 items-center p-5">
         <MdArrowBack onClick={() => router.back()} />
         <span>Contribute</span>
       </div>
 
-      {/* <div className="w-fit h-fit fixed top-2 right-2">
-        <ConnectButton
-          client={client}
-          chain={chain}
-          wallets={wallets}
-          theme={lightTheme({
-            colors: {
-              primaryButtonBg: "#01A8F6",
-              primaryButtonText: "#f2f1f3",
-            },
-          })}
-          connectButton={{
-            label: "Generate Wallet",
-          }}
-          connectModal={{
-            title: "Fahyr",
-            showThirdwebBranding: false,
-          }}
-        />
-      </div> */}
       <div className="px-5">
         <h1 className="font-bold">Description</h1>
         <p className="text-sm mt-3">
@@ -118,50 +91,39 @@ const delegateNotComplete = (err : any) => {
             </div>
           </div>
 
-          {loadingPrice ? (
-            <h2>...</h2>
-          ) : (
-            <h2>{isActive === true ? 'True' : 'False'}</h2>
-          )}
           <TransactionButton
-            transaction={() => {
-              return  prepareContractCall({
-        contract: CONTRACT,
-        method: "approveToken",
-  })}}
-            onError={(err) => window.alert(err)}
-            onTransactionSent={() => window.alert("Token Approve successfully sent")}
-            onTransactionConfirmed={() => window.alert('Token Approved')}
-            style={{ backgroundColor: "#01A8F6", color: "#ffffff" }}
-            className="bg-primary text-white p-3 rounded-full"
-          >
-            Approve Token
-          </TransactionButton>  
-          
-          {/* <TransactionButton
             transaction={() => {
               return prepareContractCall({
                 contract: CONTRACT,
-                method: "delegateToken",
-                params: [BigInt(constantId), BigInt(constantId)],
-
-                // params: [
-                //   BigInt(toWei(constantId.toString())),
-                //   BigInt(toWei(constantId.toString())),
-                // ],
+                method: "delegateEth",
+                params: [BigInt(3), BigInt(constantId)],
+                value: BigInt(toWei(amount.toString())),
               });
             }}
             onError={(err) => delegateNotComplete(err)}
-            onTransactionSent={() => window.alert("Delegate sent")}
+            
             onTransactionConfirmed={() => delegateComplete()}
             style={{ backgroundColor: "#01A8F6", color: "#ffffff" }}
             className="bg-primary text-white p-3 rounded-full"
           >
             Continue
-          </TransactionButton> */}
+          </TransactionButton>
         </div>
       </div>
       <NavigationBar />
+      <ToastContainer
+        position="top-left"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Bounce}
+      />
     </div>
   );
 }

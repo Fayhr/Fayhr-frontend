@@ -29,7 +29,6 @@ const Items: React.FC = () => {
             alt="item image"
             width={200}
             height={200}
-            placeholder="blur"
             className="h-24 w-28 rounded-xl overflow-hidden bg-black"
           />
           <div className="grid gap-1">

@@ -32,8 +32,8 @@ const CrowdModal: React.FC<ModalProps> = ({
             <Image
               src="/image/Logo_Mark.webp"
               alt="item image"
-              width={20}
-              placeholder="blur"
+              width={500}
+              height={500}
               className="w-full h-2/5 rounded-3xl"
             />
             <p className="font-bold text-xs mt-2">
@@ -59,8 +59,8 @@ const CrowdModal: React.FC<ModalProps> = ({
                   <Image
                     src="/image/Logo_Mark.webp"
                     alt="profile"
-                    width={5}
-                    height={5}
+                    width={500}
+                    height={500}
                     className="w-10 h-10 rounded-full"
                   />
                   <div className="text-xs">
@@ -75,8 +75,8 @@ const CrowdModal: React.FC<ModalProps> = ({
                   <Image
                     src="/image/Logo_Mark.webp"
                     alt="profile"
-                    width={5}
-                    height={5}
+                    width={500}
+                    height={500}
                     className="w-10 h-10 rounded-full"
                   />
                   <div className="text-xs">
