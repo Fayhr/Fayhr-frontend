@@ -91,9 +91,9 @@ const Poll: React.FC = () => {
       });
     };
     const voteNotComplete = (err: any) => {
-        console.log(err);
+      
 
-      toast(`📛 ${err?.message}`, {
+      toast(`📛 ${err}`, {
         position: "top-left",
         autoClose: 5000,
         hideProgressBar: true,
