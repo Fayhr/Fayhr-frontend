@@ -92,10 +92,12 @@ function Login() {
       router.push("/home-page");
     }
 
-    if (account?.address && isError) {
+    if (account?.address && !isSuccess) {
       logInError();
     }
-  }, [account, router, isSuccess, isError]);
+
+      return () => setIsError(false);
+  }, [account, router, isSuccess]);
 
   const handleGoBack = () => {
     router.back();

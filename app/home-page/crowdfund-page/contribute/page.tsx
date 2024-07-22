@@ -32,7 +32,7 @@ const Page = () => {
     });
   };
 const delegateNotComplete = (err: any) => {
-       toast(`📛 ${err}`, {
+       toast(`📛 ${err?.message}`, {
          position: "top-left",
          autoClose: 5000,
          hideProgressBar: true,
