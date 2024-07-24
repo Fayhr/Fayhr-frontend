@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 
 import Image from "next/image";
+// import img from '../../../public/image/TLogoB.webp'
 
 interface ModalProps {
   isVisible: boolean;
@@ -24,13 +25,13 @@ const CrowdModal: React.FC<ModalProps> = ({
   return (
     <div className="">
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-        <div className="bg-white bottom-0 h-4/5 w-full rounded-t-xl px-5">
+        <div className="bg-white bottom-0 h-4/5 w-full rounded-t-xl px-5 transform duration-1000 ease-in">
           <p onClick={onClose} className="flex p-1 me-2 justify-end text-xl">
             X
           </p>
           <div className="h-full pb-20 overflow-y-scroll no-scroll">
             <Image
-              src="/image/Logo_Mark.webp"
+              src="/image/TLogoB.webp"
               alt="item image"
               width={500}
               height={500}
@@ -57,7 +58,7 @@ const CrowdModal: React.FC<ModalProps> = ({
               <div className="flex bg-slate-100 hover:border-2 hover:border-primary rounded-3xl py-3 px-5 justify-between items-center w-full">
                 <div className="flex gap-3 items-center">
                   <Image
-                    src="/image/Logo_Mark.webp"
+                    src="/image/TLogoB.webp"
                     alt="profile"
                     width={500}
                     height={500}
@@ -73,7 +74,7 @@ const CrowdModal: React.FC<ModalProps> = ({
               <div className="flex bg-slate-100 hover:border-2 hover:border-primary rounded-3xl py-3 px-5 justify-between items-center w-full">
                 <div className="flex gap-3 items-center">
                   <Image
-                    src="/image/Logo_Mark.webp"
+                    src="/image/TLogoB.webp"
                     alt="profile"
                     width={500}
                     height={500}
@@ -89,7 +90,7 @@ const CrowdModal: React.FC<ModalProps> = ({
               <div className="flex bg-slate-100 hover:border-2 hover:border-primary rounded-3xl py-3 px-5 justify-between items-center w-full">
                 <div className="flex gap-3 items-center">
                   <Image
-                    src="/image/Logo_Mark.webp"
+                    src="/image/TLogoB.webp"
                     alt="profile"
                     width={5}
                     height={5}
@@ -105,7 +106,7 @@ const CrowdModal: React.FC<ModalProps> = ({
               <div className="flex bg-slate-100 hover:border-2 hover:border-primary rounded-3xl py-3 px-5 justify-between items-center w-full">
                 <div className="flex gap-3 items-center">
                   <Image
-                    src="/image/Logo_Mark.webp"
+                    src="/image/TLogoB.webp"
                     alt="profile"
                     width={5}
                     height={5}

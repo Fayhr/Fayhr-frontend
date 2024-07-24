@@ -63,18 +63,30 @@ const delegateNotComplete = (err: any) => {
         <h1 className="font-bold">Portions</h1>
         <div className="grid gap-7 mt-3">
           <div className="flex gap-3 mt-3">
-            <button
-              onClick={() => {
-                setPortion(portion + 1);
-                setPrice(portion * price);
-              }}
-              className="w-full border-2 rounded-xl p-2"
-            >
-              {portion}
-            </button>
+            <div className='grid grid-cols-3 items-center justify-center w-full'>
+              <button
+                onClick={() => {
+                  setPortion(portion - 1);
+                  setPrice(portion * price);
+                }}
+                className="w-full border-2 rounded-xl p-2"
+              >
+                -
+              </button>
+              <div className='w-full h-full p-2 text-center'>{portion}</div>
+              <button
+                onClick={() => {
+                  setPortion(portion + 1);
+                  setPrice(portion * price);
+                }}
+                className="w-full border-2 rounded-xl p-2"
+              >
+                +
+              </button>
+            </div>
             <button className="w-full border-2 rounded-xl p-2">N{price}</button>
           </div>
-          <input type="range" name="" className="h-1" />
+          
           <div>
             <h1 className="font-bold">Your Contribution</h1>
             <div className="flex *:font-bold *:text-sm justify-between mt-4">

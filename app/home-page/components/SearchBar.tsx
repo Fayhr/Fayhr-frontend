@@ -1,6 +1,7 @@
 import React from 'react'
 import { BsPlus } from 'react-icons/bs'
 import Image from 'next/image'
+import Posts from './Posts'
 
 // import icon from '@/public/image/Word_mark.webp'
 
@@ -13,6 +14,7 @@ const Search = () => {
         <input type="search" name="search" className='border-2 border-primary outline-none p-1 px-3 col-span-8 rounded-full' />
         <BsPlus className='col-span-2 text-3xl bg-primary text-white rounded-md' />
       </div>
+      <Posts />
     </div>
   )
 }
